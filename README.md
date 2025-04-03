@@ -1,5 +1,6 @@
-# rag-agent 
+>[!Warning] Project in progress
 
+# rag-agent 
 
 ## setup
 ```shell
