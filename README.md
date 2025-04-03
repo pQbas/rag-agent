@@ -1,4 +1,4 @@
-> [!Warning] Project in progress
+> [!WARNING] Project in progress
 
 # rag-agent 
 
