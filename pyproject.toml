@@ -1,12 +1,14 @@
 [tool.poetry]
-name = "python-project-template"
+name = "rag-agent"
 version = "0.1.0"
 description = ""
 authors = ["pQbas <percybrayan18@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">=3.9,<3.9.7 || >3.9.7,<4.0"
+langgraph = "0.3.24"
+streamlit = "1.44.1"
 
 
 [tool.poetry.group.dev.dependencies]
