@@ -1,4 +1,4 @@
-from src.agent.graph import Evaluate, GenerateAnswer, Hallucinations, Retriever, GraphState
+from src.graph import Evaluate, GenerateAnswer, Hallucinations, Retriever, GraphState
 from langchain_core.documents import Document
 
 CONTENT = (

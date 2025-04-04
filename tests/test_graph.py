@@ -1,4 +1,4 @@
-from src.agent.graph import RagGraph 
+from src.graph import RagGraph 
 from langchain_core.documents import Document
 
 CONTENT = (
