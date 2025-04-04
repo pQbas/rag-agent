@@ -1,5 +1,6 @@
 from src.agent.graph import Evaluate, GenerateAnswer, Hallucinations, Retriever, GraphState
 from langchain_core.documents import Document
+
 CONTENT = (
     "The latest trend of AI is revolutionizing various fields, especially Coding with tools like Cursor.\n"
     "The latest trend in AI is also advancing in autonomous vehicles.\n"
@@ -52,7 +53,5 @@ def test_retriever_node():
 
     retrevier_node = Retriever(CONTENT)
     response = retrevier_node.invoke({"question": QUESTION})
-
-    print(response)
 
     assert type(response) is dict 

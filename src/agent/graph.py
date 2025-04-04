@@ -142,11 +142,12 @@ class Retriever:
 
 
 class RagGraph:
-    def __init__(self, content):
-        self.reteriever = Retriever(content)
+    def __init__(self, content): 
+        self.retriever = Retriever(content)
         self.evaluate = Evaluate()
         self.generate_answer = GenerateAnswer()
         self.hallucinations = Hallucinations()
+        self.graph = self.build()
 
     def build(self): 
         workflow = StateGraph(GraphState)
@@ -179,5 +180,5 @@ class RagGraph:
         return graph 
 
 
-    def invoke(self, question):
+    def invoke(self, question, config):
         return self.graph.invoke(input={"question": question}, config = config)
