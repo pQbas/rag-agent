@@ -1,5 +1,9 @@
 from langchain_core.prompts import ChatPromptTemplate
+from pydantic import Field, create_model
+
+
 from dotenv import load_dotenv
+
 
 load_dotenv()
 
@@ -16,7 +20,12 @@ class Chain:
             ]
         )
 
-        self.output_class = output 
+        self.output_type, self.output_description = output
+
+        self.output_class = create_model(
+            'OutputModel',
+            score=(self.output_type, Field(description = self.output_description)) 
+        )
 
         self.structured_output = llm.with_structured_output(self.output_class)
 
