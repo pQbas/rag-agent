@@ -1,3 +1,12 @@
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
+from langchain.text_splitter import CharacterTextSplitter
+from langchain_chroma import Chroma
+from langchain_ollama import OllamaEmbeddings
+from langgraph.checkpoint.memory import MemorySaver
+
 from typing import List, TypedDict
 from langgraph.graph import END, StateGraph
 from src.agent.classes.chain import Chain
@@ -32,6 +41,7 @@ class Evaluate:
         for document in documents:
             response = self.evaluate_docs.invoke({"question": question, "document": document.page_content})
             result = response.score
+            print(result)
             if result.lower() == "yes":
                 filtered_docs.append(document)
             else:
@@ -132,8 +142,8 @@ class Retriever:
 
 
 class RagGraph:
-    def __init__():
-        self.reteriever = Retriever()
+    def __init__(self, content):
+        self.reteriever = Retriever(content)
         self.evaluate = Evaluate()
         self.generate_answer = GenerateAnswer()
         self.hallucinations = Hallucinations()
