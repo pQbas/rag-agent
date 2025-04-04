@@ -9,9 +9,9 @@ from langgraph.checkpoint.memory import MemorySaver
 
 from typing import List, TypedDict
 from langgraph.graph import END, StateGraph
-from src.agent.classes.chain import Chain
+from src.classes.chain import Chain
 import src.agent.llm as llm
-import src.agent.prompts as prompts
+import src.prompts as prompts
 
 class GraphState(TypedDict):
     question: str
