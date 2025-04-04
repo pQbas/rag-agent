@@ -1,4 +1,4 @@
-from langchain_core.pydantic_v1 import BaseModel, Field
+from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 from src.agent.classes.chain import Chain
 
