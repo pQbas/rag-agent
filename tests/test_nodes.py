@@ -55,4 +55,4 @@ def test_retriever_node():
 
     print(response)
 
-    # assert response 
+    assert type(response) is dict 
