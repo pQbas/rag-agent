@@ -18,7 +18,7 @@ def test_question_relevance_cheker():
 
     response = question_relevance_cheker.invoke({'question' : question, 'solution' : solution})
 
-    assert response.binary_score in [True, False]
+    assert response.score in [True, False]
 
 
 def test_document_relevance():
@@ -28,5 +28,5 @@ def test_document_relevance():
 
     response = document_relevance.invoke({'documents' : documents, 'solution' : solution})
 
-    assert response.binary_score in [True, False]
+    assert response.score in [True, False]
 
