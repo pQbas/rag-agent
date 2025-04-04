@@ -1,37 +1,8 @@
 from typing import List, TypedDict
-# from state import GraphState
 from langgraph.graph import END, StateGraph
-from langchain_core.output_parsers import StrOutputParser
-from abc import ABC, abstractmethod
 from src.agent.classes.chain import Chain
 import src.agent.llm as llm
 import src.agent.prompts as prompts
-
-
-class Graph(ABC):
-    def __init__(self):
-        self.graph = build() 
-    
-    @abstractmethod
-    def build(self):
-        """
-        Creates and configures the state graph for handling queries and generating answers.
-        """    
-        pass
-    
-    @abstractmethod
-    def invoke(self):
-        pass
-
-class Node(ABC):
-    def __call__(self, param):
-        return self.invoke(param)
-    
-    @abstractmethod
-    def invoke(self):
-        pass
-
-
 
 class GraphState(TypedDict):
     question: str
@@ -90,7 +61,7 @@ class GenerateAnswer:
 
 
 
-class AnyDoc:
+class Hallucinations:
 
     def __init__(self):
 
@@ -129,7 +100,7 @@ class AnyDoc:
             return "Hallucinations detected"
 
  
-class Retriever(Node):
+class Retriever:
     def __init__(self, content):
 
         if content is None:
@@ -160,18 +131,19 @@ class Retriever(Node):
         return {"documents": documents, "question": question}
 
 
-class RagGraph(Graph):
+class RagGraph:
     def __init__():
         self.reteriever = Retriever()
         self.evaluate = Evaluate()
         self.generate_answer = GenerateAnswer()
+        self.hallucinations = Hallucinations()
 
     def build(self): 
         workflow = StateGraph(GraphState)
          
-        workflow.add_node("Retrieve Documents", Retriever)
-        workflow.add_node("Grade Documents", Evaluate)
-        workflow.add_node("Generate Answer", GenerateAnswer)
+        workflow.add_node("Retrieve Documents", self.retriever.invoke)
+        workflow.add_node("Grade Documents", self.evaluate.invoke)
+        workflow.add_node("Generate Answer", self.generate_answer.invoke)
 
         workflow.set_entry_point("Retrieve Documents")
         workflow.add_edge("Retrieve Documents", "Grade Documents")
@@ -179,7 +151,7 @@ class RagGraph(Graph):
 
         workflow.add_conditional_edges(
             "Generate Answer",
-            Hallucinations,
+            self.hallucinations.invoke,
             {
                 "Hallucinations detected": "Generate Answer",
                 "Answers Question": END, 

@@ -1,4 +1,4 @@
-from src.agent.graph import Evaluate, GenerateAnswer, AnyDoc, Retriever, GraphState
+from src.agent.graph import Evaluate, GenerateAnswer, Hallucinations, Retriever, GraphState
 from langchain_core.documents import Document
 
 
@@ -20,8 +20,6 @@ def test_generate_answer_node():
 
     response = generate_node.invoke(graph_state_instance)
 
-    print(response.get('solution'))
-
     assert type(response) is dict 
 
 
@@ -36,8 +34,8 @@ def test_evaluate_node():
     assert type(response) is dict 
 
 
-def test_any_doc_node():
-    any_doc_node = AnyDoc()
+def test_hallucinations_node():
+    any_doc_node = Hallucinations()
     graph_state_instance = GraphState(question = QUESTION, documents = DOCUMENTS, solution = SOLUTION)
 
     response = any_doc_node.invoke(graph_state_instance)
